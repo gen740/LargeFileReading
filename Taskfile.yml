@@ -1,0 +1,15 @@
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  cmake:
+    cmds:
+      - cmake -B build -S . -GNinja
+  build:
+    cmds:
+      - cmake --build build
+  run:
+    cmds:
+      - ./build/main
