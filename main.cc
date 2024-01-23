@@ -143,51 +143,12 @@ static void LoadRawArrayMMap(benchmark::State& state) {
     fstat(fd, &st);
 
     void* addr = mmap(nullptr, st.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
-
-    // auto v = new std::uint32_t[st.st_size / sizeof(std::uint32_t)];
-    // memcpy(v, addr, st.st_size);
     benchmark::DoNotOptimize(addr);
 
     munmap(addr, st.st_size);
-    // delete[] v;
   }
 }
 
 BENCHMARK(LoadRawArrayMMap)->Iterations(10);
 
 BENCHMARK_MAIN();
-
-// auto main() -> int {
-//   int fd = open("./large_array.raw", O_RDONLY);
-//
-//   struct stat st;
-//   fstat(fd, &st);
-//
-//   std::cout << st.st_size << '\n';
-//   void* addr = mmap(nullptr, st.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
-//
-//   auto v = new std::uint32_t[st.st_size / sizeof(std::uint32_t)];
-//   memcpy(v, addr, st.st_size);
-//
-//   auto size = st.st_size / sizeof(std::uint32_t);
-//
-//   for (std::size_t i = 0; i < 10; ++i) {
-//     std::cout << v[i] << std::endl;
-//   }
-//   std::cout << "End of 10" << '\n';
-//   for (std::size_t i = size - 10; i < size; ++i) {
-//     std::cout << v[i] << std::endl;
-//   }
-//   benchmark::DoNotOptimize(v);
-//
-//   return 0;
-// }
-
-//
-// for (std::size_t i = 0; i < 10; ++i) {
-//   std::cout << v[i] << std::endl;
-// }
-// std::cout << "End of 10" << '\n';
-// for (std::size_t i = v.size() - 10; i < v.size(); ++i) {
-//   std::cout << v[i] << std::endl;
-// }
