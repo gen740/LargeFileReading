@@ -8,6 +8,7 @@ import std_modules;
 #include <unistd.h>
 
 static constexpr std::size_t BUF_SIZE = 1 << 21;
+static constexpr auto REP_TIMES = 20;
 
 static void LoadVector(benchmark::State& state) {
   for (auto _ : state) {
@@ -23,7 +24,10 @@ static void LoadVector(benchmark::State& state) {
   }
 }
 
-BENCHMARK(LoadVector)->Iterations(10);
+BENCHMARK(LoadVector)
+    ->ReportAggregatesOnly(false)
+    ->DisplayAggregatesOnly(false)
+    ->Repetitions(REP_TIMES);
 
 static void LoadRawArray(benchmark::State& state) {
   for (auto _ : state) {
@@ -43,7 +47,10 @@ static void LoadRawArray(benchmark::State& state) {
   }
 }
 
-BENCHMARK(LoadRawArray)->Iterations(10);
+BENCHMARK(LoadRawArray)
+    ->ReportAggregatesOnly(false)
+    ->DisplayAggregatesOnly(false)
+    ->Repetitions(REP_TIMES);
 
 static void LoadVectorWithChangeBufSize(benchmark::State& state) {
   for (auto _ : state) {
@@ -60,7 +67,10 @@ static void LoadVectorWithChangeBufSize(benchmark::State& state) {
   }
 }
 
-BENCHMARK(LoadVectorWithChangeBufSize)->Iterations(10);
+BENCHMARK(LoadVectorWithChangeBufSize)
+    ->ReportAggregatesOnly(false)
+    ->DisplayAggregatesOnly(false)
+    ->Repetitions(REP_TIMES);
 
 static void LoadRawArrayWithChangeBufSize(benchmark::State& state) {
   for (auto _ : state) {
@@ -81,7 +91,10 @@ static void LoadRawArrayWithChangeBufSize(benchmark::State& state) {
   }
 }
 
-BENCHMARK(LoadRawArrayWithChangeBufSize)->Iterations(10);
+BENCHMARK(LoadRawArrayWithChangeBufSize)
+    ->ReportAggregatesOnly(false)
+    ->DisplayAggregatesOnly(false)
+    ->Repetitions(REP_TIMES);
 
 static void LoadVectorUnix(benchmark::State& state) {
   for (auto _ : state) {
@@ -97,7 +110,10 @@ static void LoadVectorUnix(benchmark::State& state) {
   }
 }
 
-BENCHMARK(LoadVectorUnix)->Iterations(10);
+BENCHMARK(LoadVectorUnix)
+    ->ReportAggregatesOnly(false)
+    ->DisplayAggregatesOnly(false)
+    ->Repetitions(REP_TIMES);
 
 static void LoadRawArrayUnix(benchmark::State& state) {
   for (auto _ : state) {
@@ -115,7 +131,10 @@ static void LoadRawArrayUnix(benchmark::State& state) {
   }
 }
 
-BENCHMARK(LoadRawArrayUnix)->Iterations(10);
+BENCHMARK(LoadRawArrayUnix)
+    ->ReportAggregatesOnly(false)
+    ->DisplayAggregatesOnly(false)
+    ->Repetitions(REP_TIMES);
 
 static void LoadRawArrayUnixNoCache(benchmark::State& state) {
   for (auto _ : state) {
@@ -134,7 +153,10 @@ static void LoadRawArrayUnixNoCache(benchmark::State& state) {
   }
 }
 
-BENCHMARK(LoadRawArrayUnixNoCache)->Iterations(10);
+BENCHMARK(LoadRawArrayUnixNoCache)
+    ->ReportAggregatesOnly(false)
+    ->DisplayAggregatesOnly(false)
+    ->Repetitions(REP_TIMES);
 
 static void LoadRawArrayMMap(benchmark::State& state) {
   for (auto _ : state) {
@@ -149,6 +171,9 @@ static void LoadRawArrayMMap(benchmark::State& state) {
   }
 }
 
-BENCHMARK(LoadRawArrayMMap)->Iterations(10);
+BENCHMARK(LoadRawArrayMMap)
+    ->ReportAggregatesOnly(false)
+    ->DisplayAggregatesOnly(false)
+    ->Repetitions(REP_TIMES);
 
 BENCHMARK_MAIN();
