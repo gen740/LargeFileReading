@@ -20,5 +20,5 @@ def load_large_file():
 
 
 if __name__ == "__main__":
-    # create_large_file()
-    load_large_file()
+    create_large_file()
+    # load_large_file()

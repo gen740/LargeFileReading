@@ -1,0 +1,53 @@
+name: Bench
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  tests:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Upgrade homebrew
+        run: |
+          brew update
+        continue-on-error: true
+
+      - name: Install llvm
+        run: |
+          brew install llvm
+        continue-on-error: true
+
+      - name: Install cmake
+        run: |
+          brew install cmake
+        continue-on-error: true
+
+      - name: Install ninja
+        run: |
+          brew install ninja
+        continue-on-error: true
+
+      - name: Build
+        run: |
+          cmake -B build -S . -GNinja
+          cmake --build build
+        env:
+          CC: /usr/local/opt/llvm/bin/clang
+          CXX: /usr/local/opt/llvm/bin/clang++
+          LDFLAGS: -L/usr/local/opt/llvm/lib -L/usr/local/opt/llvm/lib/c++ -Wl,-rpath,/usr/local/opt/llvm/lib/c++
+          CPPFLAGS: -I/usr/local/opt/llvm/include
+
+      - name: Setup Benchmark
+        run: |
+          pip install numpy
+          python data_gen.py
+
+      - name: Benchmark
+        run: |
+          ./build/main --benchmark_time_unit=ms

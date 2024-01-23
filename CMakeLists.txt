@@ -2,13 +2,7 @@ cmake_minimum_required(VERSION 3.28)
 
 project(large_file CXX)
 
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 23)
-
-# Setting Build Type
-if(NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE "Release")
-endif()
 
 message(STATUS "Build Type: ${CMAKE_BUILD_TYPE}")
 
