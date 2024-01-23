@@ -6,7 +6,7 @@ vars:
 tasks:
   cmake:
     cmds:
-      - cmake -B build -S . -GNinja
+      - cmake -B build -S . -GNinja -DCMAKE_BUILD_TYPE=Release
   build:
     cmds:
       - cmake --build build
